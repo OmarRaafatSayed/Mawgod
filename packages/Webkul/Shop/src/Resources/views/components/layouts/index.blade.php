@@ -80,6 +80,37 @@
 
         <style>
             {!! core()->getConfigData('general.content.custom_scripts.custom_css') !!}
+            
+            /* Dynamic RTL/LTR Support */
+            @if(core()->getCurrentLocale()->direction == 'rtl')
+            html[dir="rtl"] {
+                direction: rtl;
+            }
+            html[dir="rtl"] .text-left {
+                text-align: right !important;
+            }
+            html[dir="rtl"] .text-right {
+                text-align: left !important;
+            }
+            html[dir="rtl"] .float-left {
+                float: right !important;
+            }
+            html[dir="rtl"] .float-right {
+                float: left !important;
+            }
+            html[dir="rtl"] .ml-auto {
+                margin-left: 0 !important;
+                margin-right: auto !important;
+            }
+            html[dir="rtl"] .mr-auto {
+                margin-right: 0 !important;
+                margin-left: auto !important;
+            }
+            @else
+            html[dir="ltr"] {
+                direction: ltr;
+            }
+            @endif
         </style>
 
         @if(core()->getConfigData('general.content.speculation_rules.enabled'))
@@ -157,6 +188,19 @@
              */
             window.addEventListener("load", function (event) {
                 app.mount("#app");
+                
+                // Ensure RTL/LTR is applied correctly
+                const htmlElement = document.documentElement;
+                const direction = htmlElement.getAttribute('dir');
+                if (direction === 'rtl') {
+                    document.body.style.direction = 'rtl';
+                    document.body.classList.add('rtl');
+                    document.body.classList.remove('ltr');
+                } else {
+                    document.body.style.direction = 'ltr';
+                    document.body.classList.add('ltr');
+                    document.body.classList.remove('rtl');
+                }
             });
         </script>
 
