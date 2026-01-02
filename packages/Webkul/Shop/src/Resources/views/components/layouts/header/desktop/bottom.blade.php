@@ -45,6 +45,16 @@
         </v-desktop-category>
 
         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.category.after') !!}
+        
+        <!-- Jobs Link -->
+        <div class="flex items-center">
+            <a
+                href="{{ route('jobs.index') }}"
+                class="flex h-[77px] items-center border-b-4 border-transparent hover:border-b-4 hover:border-navyBlue px-5 uppercase text-sm font-medium"
+            >
+                {{ app()->getLocale() === 'ar' ? 'الوظائف' : 'Jobs' }}
+            </a>
+        </div>
     </div>
 
     <!-- Right Nagivation Section -->

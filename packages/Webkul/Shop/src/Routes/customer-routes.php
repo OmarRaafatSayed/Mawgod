@@ -167,6 +167,19 @@ Route::prefix('customer')->group(function () {
 
                 Route::get('download/{id}', 'download')->name('shop.customers.account.downloadable_products.download');
             });
+
+            /**
+             * Jobs Management.
+             */
+            Route::prefix('jobs')->group(function () {
+                Route::get('', [App\Http\Controllers\Customer\JobController::class, 'index'])->name('shop.customers.account.jobs.index');
+                Route::get('create', [App\Http\Controllers\Customer\JobController::class, 'create'])->name('shop.customers.account.jobs.create');
+                Route::post('create', [App\Http\Controllers\Customer\JobController::class, 'store'])->name('shop.customers.account.jobs.store');
+                Route::get('edit/{id}', [App\Http\Controllers\Customer\JobController::class, 'edit'])->name('shop.customers.account.jobs.edit');
+                Route::put('edit/{id}', [App\Http\Controllers\Customer\JobController::class, 'update'])->name('shop.customers.account.jobs.update');
+                Route::delete('delete/{id}', [App\Http\Controllers\Customer\JobController::class, 'destroy'])->name('shop.customers.account.jobs.delete');
+                Route::get('{id}/applications', [App\Http\Controllers\Customer\JobController::class, 'applications'])->name('shop.customers.account.jobs.applications');
+            });
         });
     });
 });

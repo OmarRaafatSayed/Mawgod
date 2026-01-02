@@ -115,6 +115,49 @@
             
             {!! view_render_event('bagisto.shop.customers.account.profile.email.after') !!}
 
+            <!-- User Type -->
+            <div class="grid w-full grid-cols-[2fr_3fr] border-b border-zinc-200 px-8 py-3 max-md:px-0">
+                <p class="text-sm font-medium">
+                    {{ app()->getLocale() === 'ar' ? 'نوع الحساب' : 'Account Type' }}
+                </p>
+
+                <p class="text-sm font-medium text-zinc-500">
+                    @if($customer->user_type === 'company')
+                        {{ app()->getLocale() === 'ar' ? 'شركة' : 'Company' }}
+                    @elseif($customer->user_type === 'vendor')
+                        {{ app()->getLocale() === 'ar' ? 'بائع متجر' : 'Store Vendor' }}
+                    @else
+                        {{ app()->getLocale() === 'ar' ? 'عميل عادي' : 'Regular Customer' }}
+                    @endif
+                </p>
+            </div>
+
+            @if($customer->company_name)
+                <!-- Company Name -->
+                <div class="grid w-full grid-cols-[2fr_3fr] border-b border-zinc-200 px-8 py-3 max-md:px-0">
+                    <p class="text-sm font-medium">
+                        {{ app()->getLocale() === 'ar' ? 'اسم الشركة' : 'Company Name' }}
+                    </p>
+
+                    <p class="text-sm font-medium text-zinc-500">
+                        {{ $customer->company_name }}
+                    </p>
+                </div>
+            @endif
+
+            @if($customer->company_description)
+                <!-- Company Description -->
+                <div class="grid w-full grid-cols-[2fr_3fr] border-b border-zinc-200 px-8 py-3 max-md:px-0">
+                    <p class="text-sm font-medium">
+                        {{ app()->getLocale() === 'ar' ? 'وصف الشركة' : 'Company Description' }}
+                    </p>
+
+                    <p class="text-sm font-medium text-zinc-500">
+                        {{ $customer->company_description }}
+                    </p>
+                </div>
+            @endif
+
             {!! view_render_event('bagisto.shop.customers.account.profile.delete.before') !!}
 
             <!-- Profile Delete modal -->

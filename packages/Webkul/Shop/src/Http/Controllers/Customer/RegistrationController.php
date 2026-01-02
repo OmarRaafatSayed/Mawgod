@@ -54,6 +54,9 @@ class RegistrationController extends Controller
             'email',
             'password_confirmation',
             'is_subscribed',
+            'user_type',
+            'company_name',
+            'company_description',
         ]), [
             'password'                  => bcrypt(request()->input('password')),
             'api_token'                 => Str::random(80),

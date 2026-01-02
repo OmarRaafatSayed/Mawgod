@@ -44,10 +44,19 @@ return [
         'icon'  => 'icon-heart',
         'sort'  => 6,
     ], [
+        'key'   => 'account.jobs',
+        'name'  => app()->getLocale() === 'ar' ? 'وظائفي' : 'My Jobs',
+        'route' => 'shop.customers.account.jobs.index',
+        'icon'  => 'icon-briefcase',
+        'sort'  => 7,
+        'condition' => function() {
+            return auth('customer')->check() && in_array(auth('customer')->user()->user_type, ['company', 'vendor']);
+        },
+    ], [
         'key'   => 'account.gdpr_data_request',
         'name'  => 'shop::app.layouts.gdpr-request',
         'route' => 'shop.customers.account.gdpr.index',
         'icon'  => 'icon-gdpr-safe',
-        'sort'  => 7,
+        'sort'  => 8,
     ],
 ];

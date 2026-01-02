@@ -125,6 +125,69 @@
 
                     {!! view_render_event('bagisto.shop.customers.signup_form.email.after') !!}
 
+                    <!-- User Type -->
+                    <x-shop::form.control-group>
+                        <x-shop::form.control-group.label class="required">
+                            {{ app()->getLocale() === 'ar' ? 'نوع الحساب' : 'Account Type' }}
+                        </x-shop::form.control-group.label>
+
+                        <x-shop::form.control-group.control
+                            type="select"
+                            class="px-6 py-4 max-md:py-3 max-sm:py-2"
+                            name="user_type"
+                            rules="required"
+                            :value="old('user_type', 'customer')"
+                            :label="app()->getLocale() === 'ar' ? 'نوع الحساب' : 'Account Type'"
+                            :aria-label="app()->getLocale() === 'ar' ? 'نوع الحساب' : 'Account Type'"
+                            aria-required="true"
+                        >
+                            <option value="customer">{{ app()->getLocale() === 'ar' ? 'عميل عادي' : 'Regular Customer' }}</option>
+                            <option value="company">{{ app()->getLocale() === 'ar' ? 'شركة' : 'Company' }}</option>
+                            <option value="vendor">{{ app()->getLocale() === 'ar' ? 'بائع متجر' : 'Store Vendor' }}</option>
+                        </x-shop::form.control-group.control>
+
+                        <x-shop::form.control-group.error control-name="user_type" />
+                    </x-shop::form.control-group>
+
+                    <!-- Company Fields (shown only for company/vendor) -->
+                    <div id="company-fields" style="display: none;">
+                        <x-shop::form.control-group>
+                            <x-shop::form.control-group.label class="required">
+                                {{ app()->getLocale() === 'ar' ? 'اسم الشركة' : 'Company Name' }}
+                            </x-shop::form.control-group.label>
+
+                            <x-shop::form.control-group.control
+                                type="text"
+                                class="px-6 py-4 max-md:py-3 max-sm:py-2"
+                                name="company_name"
+                                :value="old('company_name')"
+                                :label="app()->getLocale() === 'ar' ? 'اسم الشركة' : 'Company Name'"
+                                :placeholder="app()->getLocale() === 'ar' ? 'اسم الشركة' : 'Company Name'"
+                                :aria-label="app()->getLocale() === 'ar' ? 'اسم الشركة' : 'Company Name'"
+                            />
+
+                            <x-shop::form.control-group.error control-name="company_name" />
+                        </x-shop::form.control-group>
+
+                        <x-shop::form.control-group>
+                            <x-shop::form.control-group.label>
+                                {{ app()->getLocale() === 'ar' ? 'وصف الشركة' : 'Company Description' }}
+                            </x-shop::form.control-group.label>
+
+                            <x-shop::form.control-group.control
+                                type="textarea"
+                                class="px-6 py-4 max-md:py-3 max-sm:py-2"
+                                name="company_description"
+                                :value="old('company_description')"
+                                :label="app()->getLocale() === 'ar' ? 'وصف الشركة' : 'Company Description'"
+                                :placeholder="app()->getLocale() === 'ar' ? 'وصف الشركة' : 'Company Description'"
+                                :aria-label="app()->getLocale() === 'ar' ? 'وصف الشركة' : 'Company Description'"
+                            />
+
+                            <x-shop::form.control-group.error control-name="company_description" />
+                        </x-shop::form.control-group>
+                    </div>
+
                     <!-- Password -->
                     <x-shop::form.control-group class="mb-6">
                         <x-shop::form.control-group.label class="required">
@@ -278,6 +341,27 @@
 
     @push('scripts')
         {!! \Webkul\Customer\Facades\Captcha::renderJS() !!}
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const userTypeSelect = document.querySelector('select[name="user_type"]');
+                const companyFields = document.getElementById('company-fields');
+                const companyNameInput = document.querySelector('input[name="company_name"]');
+                
+                function toggleCompanyFields() {
+                    if (userTypeSelect.value === 'company' || userTypeSelect.value === 'vendor') {
+                        companyFields.style.display = 'block';
+                        companyNameInput.setAttribute('required', 'required');
+                    } else {
+                        companyFields.style.display = 'none';
+                        companyNameInput.removeAttribute('required');
+                    }
+                }
+                
+                userTypeSelect.addEventListener('change', toggleCompanyFields);
+                toggleCompanyFields(); // Initial check
+            });
+        </script>
     @endpush
 
     <!-- Terms & Conditions Modal -->
