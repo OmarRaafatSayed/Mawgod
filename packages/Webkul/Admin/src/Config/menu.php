@@ -141,6 +141,29 @@ return [
     ],
 
     /**
+     * Jobs.
+     */
+    [
+        'key'        => 'jobs',
+        'name'       => 'الوظائف',
+        'route'      => 'admin.jobs.index',
+        'sort'       => 5.5,
+        'icon'       => 'icon-briefcase',
+    ], [
+        'key'        => 'jobs.listings',
+        'name'       => 'قائمة الوظائف',
+        'route'      => 'admin.jobs.index',
+        'sort'       => 1,
+        'icon'       => '',
+    ], [
+        'key'        => 'jobs.categories',
+        'name'       => 'تصنيفات الوظائف',
+        'route'      => 'admin.jobs.categories',
+        'sort'       => 2,
+        'icon'       => '',
+    ],
+
+    /**
      * Marketing.
      */
     [

@@ -50,7 +50,7 @@ class Job extends Model
 
     public function applications(): HasMany
     {
-        return $this->hasMany(JobApplication::class);
+        return $this->hasMany(JobApplication::class, 'job_listing_id');
     }
 
     public function getTitleAttribute($value)
