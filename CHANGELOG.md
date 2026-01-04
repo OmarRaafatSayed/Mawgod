@@ -4,6 +4,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- Soon.
+
+## **v2.3.10 (2nd of January 2026)** - *Release*
+
 - Fixed a security issue in the customer order reorder functionality.
 
 - Fixed a Server-Side Template Injection (SSTI) vulnerability in the first and last name fields that could be exploited by low-privileged users.
