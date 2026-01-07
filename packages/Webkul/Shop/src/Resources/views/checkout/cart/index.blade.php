@@ -26,7 +26,7 @@
                 <a
                     href="{{ route('shop.home.index') }}"
                     class="flex min-h-[30px]"
-                    aria-label="@lang('shop::app.checkout.cart.index.bagisto')"
+                    aria-label="Mawgood"
                 >
                     <img
                         src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
